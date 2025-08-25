@@ -1,0 +1,22 @@
+                   [ EKS Cluster (Region Example) ]
+   -----------------------------------------------------------------
+   |                                                               |
+   |   +-------------------+        +-------------------+           |
+   |   |   Horizontal Pod  |        | Cluster Autoscaler|           |
+   |   |   Autoscaler (HPA)|        |   (Node Scaling)  |           |
+   |   +---------+---------+        +---------+---------+           |
+   |             |                            |                     |
+   |   +---------v---------+        +---------v---------+           |
+   |   |   Pods (scale     |        |   Worker Nodes     |           |
+   |   |   up/down based   |        |   (EC2/Fargate)    |           |
+   |   |   on CPU, mem,    |        |   scale in/out     |           |
+   |   |   custom metrics) |        |   as pods need     |           |
+   |   +-------------------+        |   more capacity    |           |
+   |                                +-------------------+           |
+   |                                                               |
+   -----------------------------------------------------------------
+
+
+scalability
+
+keep health checks using probes

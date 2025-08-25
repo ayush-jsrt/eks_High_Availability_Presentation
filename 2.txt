@@ -1,0 +1,28 @@
+                     +-----------------------------------+
+                     |      Amazon EKS Control Plane     |
+                     |   (Multi-AZ, Managed by AWS)      |
+                     +-----------------------------------+
+                                |   (API Calls)
+        -------------------------------------------------------------
+                                |
+        +-----------------------+-----------------------+
+        |                       |                       |
++---------------+       +---------------+       +---------------+
+|   Worker Node |       |   Worker Node |       |   Worker Node |
+|   Group (AZ-a)|       |   Group (AZ-b)|       |   Group (AZ-c)|
++-------+-------+       +-------+-------+       +-------+-------+
+        |                       |                       |
+   +----v----+             +----v----+             +----v----+
+   |  Pods   |             |  Pods   |             |  Pods   |
+   +----+----+             +----+----+             +----+----+
+        |                       |                       |
+        |      +----------------+----------------+      |
+        |      |  Load Balancer (NLB/ALB)        |      |
+        +------>  Distributes traffic to Pods    <------+
+               +--------------------------------+
+
+
+
+
+
+a region has high fault tolerance. Thus it can be managed very easity in mulitple zones.

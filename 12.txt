@@ -1,0 +1,64 @@
+eksctl create cluster \
+  --name my-multi-az-cluster \
+  --version 1.29 \
+  --region us-east-1 \
+  --zones us-east-1a,us-east-1b,us-east-1c \
+  --without-nodegroup
+
+
+
+
+eksctl create nodegroup \
+  --cluster my-multi-az-cluster \
+  --region us-east-1 \
+  --name my-ng \
+  --node-type t3.medium \
+  --nodes 3 \
+  --nodes-min 2 \
+  --nodes-max 5 \
+  --managed \
+  --node-zones us-east-1a,us-east-1b,us-east-1c
+
+
+
+
+
+eksctl create fargateprofile \
+  --cluster my-multi-az-cluster \
+  --region us-east-1 \
+  --name fargate-apps \
+  --namespace serverless
+
+
+
+
+
+
+# Check cluster info
+kubectl cluster-info
+
+# List nodes and zones
+kubectl get nodes -o wide
+
+# Check node distribution across AZs
+kubectl get nodes -L topology.kubernetes.io/zone
+
+
+
+
+
+
+
+
+eksctl delete nodegroup \
+  --cluster my-multi-az-cluster \
+  --region us-east-1 \
+  --name my-ng
+
+
+
+
+
+eksctl delete cluster \
+  --name my-multi-az-cluster \
+  --region us-east-1

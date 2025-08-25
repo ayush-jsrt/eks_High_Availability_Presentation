@@ -1,0 +1,18 @@
+                [Users Worldwide]
+                        |
+                +-----------------+
+                |   Route 53      |
+                +--------+--------+
+                         |
+                 +-------v-------+
+                 |   Region A    |
+                 | (EKS Cluster) |
+                 +---------------+
+                         |
+                  <--- Latency --->
+                         |
+                  Far-away users
+
+
+
+why multi region setup?

@@ -1,0 +1,91 @@
+🔹 1. eksctl (Quick Setup / Demos / POCs)
+
+Best for: Quick, one-off cluster creation or learning EKS.
+
+Pros:
+
+Single command creates EKS cluster, nodegroups, IAM roles.
+
+Good for beginners.
+
+Cons:
+
+Not declarative (harder to manage long-term infra).
+
+Limited in CI/CD pipelines.
+
+👉 Use if you want fast cluster creation for testing.
+
+🔹 2. AWS CLI / AWS Console
+
+Best for: Very specific configurations or when scripting is enough.
+
+Pros:
+
+Direct control over AWS resources.
+
+Good for debugging or step-by-step manual setup.
+
+Cons:
+
+Not scalable.
+
+Hard to reproduce across teams.
+
+👉 Use if you need custom step-by-step control or debugging.
+
+🔹 3. Terraform (Infrastructure as Code, Multi-Cloud Ready)
+
+Best for: Production-grade infra with version control.
+
+Pros:
+
+Full IaC (infrastructure as code).
+
+Works across multi-cloud + AWS.
+
+State management + easy rollback.
+
+Cons:
+
+More learning curve than eksctl.
+
+Need to manage Terraform state (though S3 + DynamoDB helps).
+
+👉 Use if you want scalable, reusable, and version-controlled infra.
+
+🔹 4. AWS CDK / CloudFormation
+
+Best for: Teams already deep in AWS ecosystem.
+
+Pros:
+
+Native AWS support.
+
+Works seamlessly with IAM, CloudWatch, etc.
+
+Cons:
+
+Lock-in to AWS (not portable like Terraform).
+
+More verbose than Terraform.
+
+👉 Use if your team is all-in on AWS.
+
+🔹 5. AWS CodePipeline + GitOps (ArgoCD/Flux)
+
+Best for: Continuous delivery + cluster management.
+
+Pros:
+
+Automates deployments to EKS.
+
+Integrates with Git for GitOps.
+
+Cons:
+
+More moving parts.
+
+Needs Terraform/CloudFormation for initial setup anyway.
+
+👉 Use for CI/CD automation once cluster is live.

@@ -1,0 +1,20 @@
+
+
+[Players Worldwide]
+      │  (Anycast)
+      ▼
+AWS Global Accelerator (UDP/TCP)  ──►  Regional Endpoints per continent
+      │                                    │
+   Shield Advanced + WAF                   │
+      │                                    │
+      ├──────────────► NLB (Game UDP) ─► Game Servers (EC2/GameLift Fleets, ASG, Spot+OD)
+      │                                    │
+      ├──────────────► ALB (HTTPS APIs) ─► Microservices (EKS/Fargate/Lambda)
+      │                                    │
+      └──────────────► CloudFront (CDN) ─► S3 (patches/assets, MRAP)
+                                           │
+          ┌──────────────┬─────────────────┴──────────────┐
+          ▼              ▼                                ▼
+   DynamoDB Global   ElastiCache/MemoryDB           Aurora Global DB
+     Tables (profile,   (match/session cache)        (economy/transactions)
+     inventory, MMR)

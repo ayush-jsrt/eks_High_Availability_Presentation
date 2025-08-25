@@ -1,0 +1,29 @@
+ EKS Cluster --> Prometheus --> Grafana (Dashboards)
+ EKS Cluster --> CloudWatch --> Centralized Metrics & Logs
+
+
+
+                   ┌────────────────────────┐
+                   │   Multi-Region EKS     │
+                   └────────────────────────┘
+                               │
+              ┌────────────────┴────────────────┐
+              │                                 │
+   ┌───────────────────┐              ┌───────────────────┐
+   │   CloudWatch       │              │   Prometheus      │
+   │  (Logs + Metrics)  │              │  (K8s Metrics)    │
+   └───────────────────┘              └───────────────────┘
+              │                                 │
+              └──────────────┬──────────────────┘
+                             │
+                  ┌─────────────────────┐
+                  │   Grafana Dashboards│
+                  └─────────────────────┘
+                             │
+                  ┌─────────────────────┐
+                  │  Alerts & Automation│
+                  │ (X-Ray, AlertManager)│
+                  └─────────────────────┘
+
+
+

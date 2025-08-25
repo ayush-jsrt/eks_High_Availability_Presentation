@@ -1,0 +1,25 @@
+                    [ Users Worldwide ]
+                             |
+         -------------------------------------------------
+         |                                               |
+   +-----v-----+                                   +-----v-----+
+   | Region A  |                                   | Region B  |
+   |-----------|                                   |-----------|
+   |  EKS      |                                   |  EKS      |
+   | Cluster   |                                   | Cluster   |
+   |-----------|                                   |-----------|
+   | Worker    |                                   | Worker    |
+   | Nodes     |                                   | Nodes     |
+   | (Pods)    |                                   | (Pods)    |
+   +-----------+                                   +-----------+
+
+
+
+
+Sync (workloads, configs, secrets, CRDs, etc.) between those clusters has to be handled by you, usually with tools like:
+
+GitOps (ArgoCD,Flux) for keeping manifests identical,
+
+KubeFed (Federation) for multi-cluster management,
+
+service meshes (Istio, Linkerd)for cross-region communication.

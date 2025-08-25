@@ -1,0 +1,33 @@
++---------------------------------------------------------------+
+|          Why Terraform + CI/CD Pipeline over eksctl?           |
++---------------------------------------------------------------+
+
+ eksctl (Quick & Simple)                     Terraform + CI/CD (Scalable & Pro)
+ -----------------------                     -----------------------------------
+ - ✅ Easy to start                          - ✅ Infrastructure as Code (IaC)
+ - ✅ Single command cluster                 - ✅ Version-controlled (GitOps)
+ - ❌ Hard to manage HA / Prod               - ✅ Reproducible, Auditable
+ - ❌ No state tracking                      - ✅ Manages State (S3 + DynamoDB)
+ - ❌ Not great for automation               - ✅ CI/CD ready (CodePipeline/Jenkins/GitHub)
+ - ❌ AWS-only, limited extensions           - ✅ Multi-cloud & modular
+
+ Result:                                     Result:
+ -------                                     -------
+ Great for quick demos or POCs               Ideal for HA, Prod & Team workflows
+                                             
++---------------------------------------------------------------+
+|    Terraform + CI/CD = Repeatable, Reliable, Enterprise-ready  |
++---------------------------------------------------------------+
+
+
+
+
+
+
+
+
+terraform
+cloudformation / aws cdk
+aws actions
+aws codepipline
+pulumi

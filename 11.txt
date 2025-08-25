@@ -1,0 +1,26 @@
+                ┌──────────────────────────┐
+                │       Global Users       │
+                └────────────┬─────────────┘
+                             │
+             ┌───────────────┴───────────────┐
+             │         Route 53 / GA         │
+             └───────────────┬───────────────┘
+                             │
+      ┌──────────────────────┴──────────────────────┐
+      │                                             │
+┌───────────────┐                           ┌───────────────┐
+│ Region A (Primary)                        │ Region B (Secondary)
+│  - EKS (Multi-AZ)                         │  - EKS (Multi-AZ)
+│  - HPA / VPA / CA                         │  - Failover Cluster
+│  - ElastiCache / MemoryDB                 │  - Read Replica Aurora
+│  - Aurora Global (Writer)                 │  - Cross-Region S3
+│  - S3 (Primary Bucket)                    │  - Disaster Recovery
+└───────────────┘                           └───────────────┘
+      │                                             │
+      └───────────────┬───────────────┬─────────────┘
+                      │               │
+        ┌──────────────────┐   ┌───────────────┐
+        │ Monitoring/Logs  │   │ Cost Controls │
+        │ CloudWatch,      │   │ Fargate, Spot │
+        │ Prometheus, etc. │   │ RIs, gp3 EBS  │
+        └──────────────────┘   └───────────────┘

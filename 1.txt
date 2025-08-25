@@ -1,0 +1,61 @@
+                +-----------------------------+
+                |      Amazon EKS Control     |
+                |     Plane (Managed by AWS)  |
+                +-----------------------------+
+                          |   (API Calls)
+          -------------------------------------------------
+                          |
+        +-----------------+-------------------+
+        |                 |                   |
++---------------+  +---------------+  +---------------+
+| Worker Node   |  | Worker Node   |  | Worker Node   |
+| (EC2/Managed  |  | (EC2/Managed  |  | (EC2/Managed  |
+|   Node Group) |  |   Node Group) |  |   Node Group) |
++-------+-------+  +-------+-------+  +-------+-------+
+        |                  |                   |
+   +----v----+        +----v----+         +----v----+
+   |  Pods   |        |  Pods   |         |  Pods   |
+   +---------+        +---------+         +---------+
+
+
+
+
+
+
+
+
+
+These you will se when you try to find resources in the kube-system namespace:
+
+        aws-node
+        core-dns
+        metric-server
+        kube-proxy
+
+        - ebs-csi-driver/controller
+
+
+But you wont find these:
+
+        kube-apiserver
+        etcd
+        kube-scheduler
+        kube-controller-manager
+
+Cause they are managed by aws itself and is more secure.
+
+
+
+
+type of attachable nodegroup:
+
+        - managed
+        - self managed
+        - fargate
+
+
+use instance types based on the used case and create required taints such that your components get the correct infrastructure they need:
+
+- general purpose t3, m5
+- high compute nodes c5, c6g or p series
+- memory optimized nodes r5, r6g

@@ -1,0 +1,46 @@
+                       [ Users Worldwide ]
+                                |
+                        +----------------+
+                        |   Route 53 /   |
+                        | Global Routing |
+                        +--------+-------+
+                                 |
+            ---------------------------------------------
+            |                                           |
+     +------v------+                            +-------v-----+
+     |   Region A  |                            |   Region B  |
+     |-------------|                            |-------------|
+     |   Ingress   |                            |   Ingress   |
+     | (ALB / NLB) |                            | (ALB / NLB) |
+     +------|------+                            +------|------+
+            |                                           |
+     +------v------+                            +-------v-----+
+     |   EKS       |                            |   EKS       |
+     |  Cluster    |                            |  Cluster    |
+     |-------------|                            |-------------|
+     | Worker      |                            | Worker      |
+     | Nodes (Pods)|                            | Nodes (Pods)
+     +-------------+                            +-------------+
+
+
+
+
+
+
+How the request actually flows
+
+Case A – NLB / Classic ELB with Service LoadBalancer:
+
+Client → AWS LB (distributes by NodeIP:NodePort) → kube-proxy → PodIP:PodPort
+
+
+Case B – ALB (Ingress with aws-load-balancer-controller):
+
+Client → ALB (distributes by PodIP:PodPort directly) → Pod
+
+
+- service discovery
+- traffic distribution
+- health checking
+- protocol handling
+- high availability and failover

@@ -1,0 +1,60 @@
+ [Customers Worldwide]
+          │
+          ▼
+   AWS Route 53 (Latency-based DNS)
+          │
+   ┌──────┴─────────┐
+   ▼                ▼
+Region A (US)   Region B (EU)
+   │                │
+   │                │
+AWS Global Accelerator (TCP/HTTPS)  <-- Anycast routing
+   │
+   ▼
+ ┌───────────────────────────────────────────────┐
+ │  Networking & Security                        │
+ │  - AWS Shield Advanced (DDoS protection)      │
+ │  - AWS WAF (App layer filtering)              │
+ │  - VPC with Public/Private Subnets            │
+ └───────────────────────────────────────────────┘
+   │
+   ▼
+┌─────────────────────────────┐
+│ Application Layer            │
+│ - ALB (HTTPS)                │
+│ - EKS (Microservices)        │
+│     • Product Catalog        │
+│     • Cart Service           │
+│     • Order Service          │
+│ - Fargate (lightweight jobs) │
+│ - Lambda (event-driven)      │
+└─────────────────────────────┘
+   │
+   ▼
+┌─────────────────────────────┐
+│ Data Layer                  │
+│ - Aurora Global DB           │
+│   (Order + Transactions)    │
+│ - DynamoDB Global Tables     │
+│   (User sessions, carts)     │
+│ - S3 (Images, media) +       │
+│   Cross-region replication   │
+│ - ElastiCache (Redis)        │
+│   (session caching)          │
+└─────────────────────────────┘
+   │
+   ▼
+┌─────────────────────────────┐
+│ Content Delivery             │
+│ - CloudFront (static assets) │
+│ - S3 MRAP (multi-region)     │
+└─────────────────────────────┘
+   │
+   ▼
+┌─────────────────────────────┐
+│ Observability & Ops          │
+│ - CloudWatch (metrics/logs)  │
+│ - X-Ray (tracing)            │
+│ - Prometheus + Grafana       │
+│ - GuardDuty + SecurityHub    │
+└─────────────────────────────┘

@@ -1,0 +1,112 @@
+~ $ history
+    1  kubectl
+    2  eksctl
+    3  uname -a
+    4  kubectl --version
+    5  kubectl -v
+    6  kubectl -version
+    7  kubectl
+    8  kubectl version
+    9  curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.33.3/2025-08-03/bin/linux/amd64/kubectl
+   10  ls
+   11  # for ARM systems, set ARCH to: `arm64`, `armv6` or `armv7`
+   12  ARCH=amd64
+   13  PLATFORM=$(uname -s)_$ARCH
+   14  curl -sLO "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_$PLATFORM.tar.gz"
+   15  # (Optional) Verify checksum
+   16  curl -sL "https://github.com/eksctl-io/eksctl/releases/latest/download/eksctl_checksums.txt" | grep $PLATFORM | sha256sum --check
+   17  tar -xzf eksctl_$PLATFORM.tar.gz -C /tmp && rm eksctl_$PLATFORM.tar.gz
+   18  sudo install -m 0755 /tmp/eksctl /usr/local/bin && rm /tmp/eksctl
+   19  ls
+   20  eksctl
+   21  eksctl create cluster --name=eksvilas --region=us-east-2 --zones=us-east-2a,us-east-2b --without-nodegroup 
+   22  eksctl create cluster --name=eksayush --region=us-east-2 --zones=us-east-2a,us-east-2b --without-nodegroup 
+   23  eksctl delete cluster --region=us-east-2 --name=eksayush
+   24  eksctl create cluster --name=eksayush --region=ap-southeast-1 --zones=ap-southeast-1a --without-nodegroup 
+   25  eksctl create cluster --name=eksayush --region=ap-southeast-1 --zones=ap-southeast-1a,ap-southeast-1b --without-nodegroup 
+   26  eksctl create nodegroup --cluster=eksayush --region=ap-southeast-1 --name=eksayush-ng-public1 --node-type=t2.medium --nodes=2 --nodes-min=1 --nodes-max=3 --node-volume-size=30 --ssh-access --ssh-public-key=ayushsingapore --managed --asg-access --external-dns-access --full-ecr-access --appmesh-access --alb-ingress-access --spot
+   27  aws sts get-caller-identity
+   28  aws eks update-kubeconfig --region us-east-2 --name eksayush
+   29  aws eks update-kubeconfig --region ap-southeast-1 --name eksayush
+   30  kubectl get no
+   31  kubectl get all
+   32  kubectl get all -n kube-system
+   33  echo $EFS_CSI_ADDON_ROLE
+   34  aws eks create-addon --cluster-name $EKS_CLUSTER_NAME --addon-name aws-efs-csi-driver   --service-account-role-arn $EFS_CSI_ADDON_ROLE
+   35  aws eks create-addon --cluster-name eksayush --addon-name aws-efs-csi-driver   --service-account-role-arn $EFS_CSI_ADDON_ROLE
+   36  aws configure
+   37  clear
+   38  aws configure
+   39  aws eks create-addon --cluster-name eksayush --addon-name aws-efs-csi-driver   --service-account-role-arn $EFS_CSI_ADDON_ROLE
+   40  eksctl utils associate-iam-oidc-provider --region ap-southeast-1 --cluster eksayush --approve
+   41  eksctl create iamserviceaccount   --region ap-southeast-1   --name ebs-csi-controller-sa   --namespace kube-system   --cluster eksayush   --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy   --approve
+   42  kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/ecr/?ref=release-1.12"
+   43  vi storage.yml
+   44  ls
+   45  kubectl apply -f storage.yml 
+   46  cat storage.yml 
+   47  nano storage.yml 
+   48  cat storage.yml 
+   49  kubectl apply -f storage.yml 
+   50  kubectl get sc
+   51  nano pvc.yaml
+   52  kubectl apply -f pvc.yaml 
+   53  kubectl get pvc
+   54  kubectl get pv
+   55  kubectl describe pvc
+   56  kubectl describe pv
+   57  kubectl get po -n kube-system
+   58  kubectl get sa -n kube-system ebs-csi-controller-sa
+   59  kubectl get sa -n kube-system ebs-csi-controller-sa -o yaml
+   60  kubectl get sc
+   61  ls
+   62  kubectl delete -f storage.yml 
+   63  nano storage.yml 
+   64  kubectl apply -f storage.yml 
+   65  kubectl get sc
+   66  kubectl get pvc
+   67  kubectl get sc
+   68  cat storage.yml 
+   69  kubectl describe sc gp2
+   70  kubectl delete pvc --all
+   71  ls
+   72  kubectl apply -f pvc.yaml 
+   73  kubectl get pvc
+   74  kubectl describe pvc
+   75  kubectl get sc
+   76  kubectl get gp2
+   77  kubectl describe sc gp2
+   78  cat storage.yml 
+   79  nano storage.yml 
+   80  kubectl apply -f storage.yml 
+   81  kubectl delete sc --all
+   82  kubectl sc
+   83  kubectl get sc
+   84  eksctl utils associate-iam-oidc-provider --region ap-southeast-1 --cluster eksayush --approve
+   85  kubectl get sc
+   86  kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/ecr/?ref=release-1.12"
+   87  kubectl get sc
+   88  history
+   89  eksctl create iamserviceaccount   --region ap-southeast-1   --name ebs-csi-controller-sa   --namespace kube-system   --cluster eksayush   --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy   --approve
+   90  kubectl get sc
+   91  kubectl apply -f storage.yml 
+   92  kubectl get pvc
+   93  nano pod.yaml
+   94  kubectl apply -f pod.yaml 
+   95  kubectl get pvc
+   96  kubectl get pv
+   97  history
+~ $ kubectl get po -n kube-system
+NAME                                  READY   STATUS    RESTARTS   AGE
+aws-node-6x5kt                        2/2     Running   0          55m
+aws-node-c4jth                        2/2     Running   0          56m
+coredns-68bb4d6745-2z6tj              1/1     Running   0          60m
+coredns-68bb4d6745-cbb8m              1/1     Running   0          60m
+ebs-csi-controller-69dc7879d8-jw2xr   6/6     Running   0          31m
+ebs-csi-controller-69dc7879d8-kgnb7   6/6     Running   0          31m
+ebs-csi-node-m8gmg                    3/3     Running   0          31m
+ebs-csi-node-vfspq                    3/3     Running   0          31m
+kube-proxy-dr4m9                      1/1     Running   0          56m
+kube-proxy-xpv76                      1/1     Running   0          55m
+metrics-server-64887f9b48-4vszv       1/1     Running   0          60m
+metrics-server-64887f9b48-9nxv5       1/1     Running   0          60m
